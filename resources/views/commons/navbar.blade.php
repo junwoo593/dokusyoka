@@ -14,9 +14,9 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if (Auth::check())
                         <li>
-                            <a href="#">
+                            <a href="{{ route('books.create') }}">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                Adding Items
+                                   Adding Items
                               </a>
                         </li>
 
