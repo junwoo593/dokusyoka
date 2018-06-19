@@ -5,7 +5,9 @@
         <div class="cover-inner">
             <div class="cover-contents">
                 <h1>DOKUSYOKAで新たな出会いを</h1>
-                <a href= "https://corp.rakuten.co.jp/" class="btn btn-success btn-lg">Click!</a>
+                @if (!Auth::check())
+                 <a href="{{ route('signup.get') }}" class="btn btn-success btn-lg">Let's Start DOKUSYOKA</a>
+                @endif
             </div>
         </div>
     </div>
@@ -14,3 +16,5 @@
 @section('content')
 
 @endsection
+
+
