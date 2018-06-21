@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
 
-use App\Item;
+use App\Book;
 
 class WelcomeController extends Controller
 {
@@ -17,6 +17,10 @@ class WelcomeController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        
+        $books = Book::orderBy('updated_at', 'desc')->paginate(4);
+        return view('welcome', [
+            'books' => $books,
+        ]);
     }
 }

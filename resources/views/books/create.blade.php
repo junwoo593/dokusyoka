@@ -6,13 +6,13 @@
             <div class="text-center">
                 {!! Form::open(['route' => 'books.create', 'method' => 'get', 'class' => 'form-inline']) !!}
                     <div class="form-group">
-                        {!! Form::text('keyword', $keyword, ['class' => 'form-control input-lg', 'placeholder' => 'キーワードを入力', 'size' => 40]) !!}
+                        {!! Form::text('title', $title, ['class' => 'form-control input-lg', 'placeholder' => 'キーワードを入力', 'size' => 40]) !!}
                     </div>
-                    {!! Form::submit('商品を検索', ['class' => 'btn btn-success btn-lg']) !!}
+                    {!! Form::submit('Search Items', ['class' => 'btn btn-success btn-lg']) !!}
                 {!! Form::close() !!}
             </div>
         </div>
     </div>
 
-    @include('books.books', ['items' => $items])
+    @include('books.books', ['books' => $books])
 @endsection

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use \App\Book;
+use App\Http\Controllers\Controller;
+
+use App\Book;
 
 class BooksController extends Controller
 {
@@ -12,14 +14,14 @@ class BooksController extends Controller
     
      public function create()
     {
-        $keyword = request()->keyword;
+        $title = request()->title;
         $items = [];
-        if ($keyword) {
+        if ($title) {
             $client = new \RakutenRws_Client();
             $client->setApplicationId(env('RAKUTEN_APPLICATION_ID'));
 
-            $rws_response = $client->execute('BooksTotalSearch', [
-                'keyword' => $keyword,
+            $rws_response = $client->execute('BooksBookSearch', [
+                'title' => $title,
                 'imageFlag' => 1,
                 'hits' => 20,
             ]);
@@ -36,9 +38,21 @@ class BooksController extends Controller
         }
 
         return view('books.create', [
-            'keyword' => $keyword,
-            'items' => $items,
+            
+            'title' => $title,
+            'books' => $items,
         ]);
     }
+    
+    public function show($id)
+    {
+      $book = Book::find($id);
+      $want_users = $book->want_users;
+
+      return view('books.show', [
+          'book' => $book,
+          'want_users' => $want_users,
+      ]);
   }
+}
 

@@ -16,7 +16,7 @@
                         <li>
                             <a href="{{ route('books.create') }}">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                   Adding Items
+                                   Add Items
                               </a>
                         </li>
 
@@ -30,7 +30,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="#">My Page</a>
+                                    <a href="{{ route('users.show', Auth::user()->id) }}">My Page</a>
                                 </li>
                                 <li role="separator" class="divider"></li>
                                 <li>
