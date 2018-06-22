@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col-xs-offset-3 col-xs-6">
-        <div class="panel panel-default">
+        <div class="panel panel-danger">
             <div class="panel-heading">Login</div>
             <div class="panel-body">
                 {!! Form::open(['route' => 'login.post']) !!}
@@ -18,7 +18,7 @@
                     </div>
 
                     <div class="text-right">
-                        {!! form::submit('Go Login', ['class' => 'btn btn-success']) !!}
+                        {!! form::submit('Go Login', ['class' => 'btn btn-danger']) !!}
                     </div>
                 {!! form::close() !!}
             </div>

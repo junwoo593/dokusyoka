@@ -1,3 +1,2 @@
 <footer>
-    <div class="text-center text-muted">Ⓡ 2018"DOKUSYOKA"</div>
-</footer>
+    <div class="text-center text-muted"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"><big>ⓇDOKUSYOKA</big><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>

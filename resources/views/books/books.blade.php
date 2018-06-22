@@ -1,6 +1,6 @@
 @if ($books)
     <div class="row">
-        @foreach ($books as $key=>$book)
+        @foreach ($books as $key => $book)
             <div class="book">
                 <div class="col-md-3 col-sm-4 col-xs-12">
                     <div class="panel panel-default">
@@ -16,18 +16,21 @@
                             <div class="buttons text-center">
                                 @if (Auth::check())
                                     @include('books.want_button', ['book' => $book])
+                                    
                                 @endif
                             </div>
                         </div>
+                        @if (isset($book->count))
+                            <div class="panel-footer">
+                                <p class="text-center">{{ $key+1 }}位: {{ $book->count}}<span>people</span></p>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
         @endforeach
     </div>
 @endif
-
-
-
 
 
 
