@@ -25,12 +25,18 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('books', 'BooksController', ['only' => ['create','show']]);
     Route::post('want', 'BookUserController@want')->name('book_user.want');
     Route::delete('want', 'BookUserController@dont_want')->name('book_user.dont_want');
+    Route::post('have', 'BookUserController@have')->name('book_user.have');
+    Route::delete('have', 'BookUserController@dont_have')->name('book_user.dont_have');
     Route::resource('users', 'UsersController', ['only' => ['index','show']]);
     Route::group(['prefix' => 'users/{id}'], function () {
         Route::post('follow', 'UserFollowController@store')->name('user.follow');
         Route::delete('unfollow', 'UserFollowController@destroy')->name('user.unfollow');
         Route::get('followings', 'UsersController@followings')->name('users.followings');
         Route::get('followers', 'UsersController@followers')->name('users.followers');
+        Route::get('have', 'UsersController@have_books')->name('users.have');
+        Route::get('want', 'UsersController@want_books')->name('users.want');
+        
+        
     });
 });
 

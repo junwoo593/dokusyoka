@@ -55,4 +55,41 @@ class BookUserController extends Controller
         }
         return redirect()->back();
     }
+    
+    public function have()
+    {
+        $title = request()->book_title;
+
+        // Search items from "itemCode"
+        $client = new \RakutenRws_Client();
+        $client->setApplicationId(env('RAKUTEN_APPLICATION_ID'));
+        $rws_response = $client->execute('BooksBookSearch', [
+            'title' => $title,
+        ]);
+        $rws_item = $rws_response->getData()['Items'][0]['Item'];
+
+        // create Item, or get Item if an item is found
+        $item = Book::firstOrCreate([
+            'isbn' => $rws_item['isbn'],
+            'title' => $rws_item['title'],
+            'url' => $rws_item['itemUrl'],
+            // remove "?_ex=128x128" because its size is defined
+            'image_url' => str_replace('?_ex=128x128', '', $rws_item['mediumImageUrl'])
+        ]);
+
+        \Auth::user()->have($item->id);
+
+        return redirect()->back();
+    }
+
+    public function dont_have()
+    {
+        $title = request()->book_title;
+
+        if (\Auth::user()->is_having($title)) {
+            $itemId = Book::where('title', $title)->first()->id;
+            \Auth::user()->dont_have($itemId);
+        }
+        return redirect()->back();
+    }
 }

@@ -16,13 +16,13 @@
                             <div class="buttons text-center">
                                 @if (Auth::check())
                                     @include('books.want_button', ['book' => $book])
-                                    
+                                    @include('books.have_button', ['book' => $book])
                                 @endif
                             </div>
                         </div>
                         @if (isset($book->count))
                             <div class="panel-footer">
-                                <p class="text-center">{{ $key+1 }}位: {{ $book->count}}<span>people</span></p>
+                                <p class="text-center"><span>{{ $key+1 }}</span><span>位</span><span>:</span><span>{{ $book->count}}</span> <span>people</span></p>
                             </div>
                         @endif
                     </div>

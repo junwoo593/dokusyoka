@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\User;
+
 use App\Book;
 
 class UsersController extends Controller
@@ -23,14 +24,18 @@ class UsersController extends Controller
         $count_want = $user->want_books()->count();
         $count_followings = $user->followings()->count();
         $count_followers = $user->followers()->count();
+        $count_have = $user->have_books()->count();
         $items = \DB::table('books')->join('book_user', 'books.id', '=', 'book_user.book_id')->select('books.*')->where('book_user.user_id', $user->id)->distinct()->paginate(20);
+        $count_books = $user->books()->count();
 
         return view('users.show', [
             'user' => $user,
             'books' => $items,
             'count_want' => $count_want,
+            'count_have' => $count_have,
             'count_followings' => $count_followings,
             'count_followers' => $count_followers,
+            'count_books' => $count_books,
             // 'count_have' => $count_have,
         ]);
     }
@@ -76,5 +81,38 @@ class UsersController extends Controller
         ]);
     }
     
+    public function have_books($id)
+    {
+        $user = User::find($id);
+        $have_books = $user->have_books()->paginate(10);
+        $items = \DB::table('books')->join('book_user', 'books.id', '=', 'book_user.book_id')->select('books.*')->where('book_user.user_id', $user->id)->distinct()->paginate(20);
+
+        $data = [
+            'user' => $user,
+            'books' => $items,
+            'have_books' => $have_books,
+        ];
+
+        $data += $this->counts($user);
+
+        return view('users.have', $data);
+    }
+    
+     public function want_books($id)
+    {
+        $user = User::find($id);
+        $want_books = $user->want_books()->paginate(10);
+        $items = \DB::table('books')->join('book_user', 'books.id', '=', 'book_user.book_id')->select('books.*')->where('book_user.user_id', $user->id)->distinct()->paginate(20);
+
+        $data = [
+            'user' => $user,
+            'books' => $items,
+            'want_books' => $want_books,
+        ];
+
+        $data += $this->counts($user);
+
+        return view('users.show', $data);
+    }
         
 }

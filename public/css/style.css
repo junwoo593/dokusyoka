@@ -2,7 +2,7 @@
 
 /* body */
 body {
-    background-color: #F7F8E0;
+    background: url("https://images.unsplash.com/photo-1500393600906-a3136b3c5f70?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=43f68365543ecc00817d158627c4406a&auto=format&fit=crop&w=1868&q=80")center center no-repeat;
 }
 footer  {
     margin-top: 50px;
@@ -17,7 +17,7 @@ span {
 
 /* navbar */
 .navbar {
-    background-color: #F7F8E0;
+    background-color: white;
 }
 .navbar-header img {
     margin-top: 10px;
@@ -141,6 +141,6 @@ p.book-title {
 
 .text-center span {
     
-    color:red;
+    color:brown;
 }
 

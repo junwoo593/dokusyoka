@@ -129,4 +129,52 @@ public function is_following($userId) {
     return $this->followings()->where('follow_id', $userId)->exists();
 }
 
+  public function have_books()
+    {
+        return $this->books()->where('type', 'have');
+    }
+
+    public function have($itemId)
+    {
+        // Is the user already "want"?
+        $exist = $this->is_having($itemId);
+
+        if ($exist) {
+            // do nothing
+            return false;
+        } else {
+            // do "want"
+            $this->books()->attach($itemId, ['type' => 'have']);
+            return true;
+        }
+    }
+
+    public function dont_have($itemId)
+    {
+        // Is the user already "want"?
+        $exist = $this->is_having($itemId);
+
+        if ($exist) {
+            // remove "want"
+            \DB::delete("DELETE FROM book_user WHERE user_id = ? AND book_id = ? AND type = 'have'", [\Auth::user()->id, $itemId]);
+        } else {
+            // do nothing
+            return false;
+        }
+    }
+
+    public function is_having($itemIdOrCode)
+    {
+        if (is_numeric($itemIdOrCode)) {
+            $item_id_exists = $this->have_books()->where('book_id', $itemIdOrCode)->exists();
+            return $item_id_exists;
+        } else {
+            $item_title_exists = $this->have_books()->where('title', $itemIdOrCode)->exists();
+            return $item_title_exists;
+        }
+    }
+
 }
+
+
+
