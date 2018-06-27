@@ -36,7 +36,7 @@ class BookUserController extends Controller
             'isbn' => $rws_item['isbn'],
             'title' => $rws_item['title'],
             'url' => $rws_item['itemUrl'],
-            'image_url' => str_replace('?_ex=120x120', '', $rws_item['mediumImageUrl'])
+            'image_url' => str_replace('?_ex=200x200', '', $rws_item['largeImageUrl'])
                
         ]);
 
@@ -74,7 +74,7 @@ class BookUserController extends Controller
             'title' => $rws_item['title'],
             'url' => $rws_item['itemUrl'],
             // remove "?_ex=128x128" because its size is defined
-            'image_url' => str_replace('?_ex=128x128', '', $rws_item['mediumImageUrl'])
+            'image_url' => str_replace('?_ex=200x200', '', $rws_item['largeImageUrl'])
         ]);
 
         \Auth::user()->have($item->id);

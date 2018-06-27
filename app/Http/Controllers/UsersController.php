@@ -25,8 +25,8 @@ class UsersController extends Controller
         $count_followings = $user->followings()->count();
         $count_followers = $user->followers()->count();
         $count_have = $user->have_books()->count();
+        $count_microposts = $user->microposts()->count();
         $items = \DB::table('books')->join('book_user', 'books.id', '=', 'book_user.book_id')->select('books.*')->where('book_user.user_id', $user->id)->distinct()->paginate(20);
-        $count_books = $user->books()->count();
 
         return view('users.show', [
             'user' => $user,
@@ -35,7 +35,7 @@ class UsersController extends Controller
             'count_have' => $count_have,
             'count_followings' => $count_followings,
             'count_followers' => $count_followers,
-            'count_books' => $count_books,
+            'count_microposts' => $count_microposts,
             // 'count_have' => $count_have,
         ]);
     }

@@ -150,7 +150,7 @@ public function is_following($userId) {
     }
 
     public function dont_have($itemId)
-    {
+    { 
         // Is the user already "want"?
         $exist = $this->is_having($itemId);
 
@@ -173,7 +173,13 @@ public function is_following($userId) {
             return $item_title_exists;
         }
     }
-
+    
+     public function microposts()
+    {
+        return $this->hasMany(Micropost::class);
+    }
+    
+  
 }
 
 

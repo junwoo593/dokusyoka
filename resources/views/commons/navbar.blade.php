@@ -27,6 +27,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{ route('ranking.want') }}">♥ Ranking</a></li>
+                                <li><a href="{{ route('ranking.have') }}">♥ Having</a></li>
                             </ul>
                         </li>
                         <li>

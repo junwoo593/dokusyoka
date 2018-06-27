@@ -17,8 +17,13 @@ Route::post('signup', 'Auth\RegisterController@register')->name('signup.post');
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login')->name('login.post');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
+
+
+
 // Ranking
 Route::get('ranking/want', 'RankingController@want')->name('ranking.want');
+Route::get('ranking/have', 'RankingController@have')->name('ranking.have');
+Route::get('/', 'WelcomeController@index');
 
 
 Route::group(['middleware' => ['auth']], function () {
@@ -28,6 +33,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('have', 'BookUserController@have')->name('book_user.have');
     Route::delete('have', 'BookUserController@dont_have')->name('book_user.dont_have');
     Route::resource('users', 'UsersController', ['only' => ['index','show']]);
+    Route::resource('microposts', 'MicropostsController', ['only' => ['store', 'destroy',]]);
     Route::group(['prefix' => 'users/{id}'], function () {
         Route::post('follow', 'UserFollowController@store')->name('user.follow');
         Route::delete('unfollow', 'UserFollowController@destroy')->name('user.unfollow');
@@ -35,6 +41,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('followers', 'UsersController@followers')->name('users.followers');
         Route::get('have', 'UsersController@have_books')->name('users.have');
         Route::get('want', 'UsersController@want_books')->name('users.want');
+    
         
         
     });

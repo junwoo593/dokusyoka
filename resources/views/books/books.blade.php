@@ -23,6 +23,7 @@
                         @if (isset($book->count))
                             <div class="panel-footer">
                                 <p class="text-center"><span>{{ $key+1 }}</span><span>位</span><span>:</span><span>{{ $book->count}}</span> <span>people</span></p>
+                                
                             </div>
                         @endif
                     </div>

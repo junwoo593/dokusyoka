@@ -32,7 +32,7 @@ class BooksController extends Controller
                 $item->isbn = $rws_item['Item']['isbn'];
                 $item->title = $rws_item['Item']['title'];
                 $item->url = $rws_item['Item']['itemUrl'];
-                $item->image_url = str_replace('?_ex=120x120', '', $rws_item['Item']['mediumImageUrl']);
+                $item->image_url = str_replace('?_ex=200x200', '', $rws_item['Item']['largeImageUrl']);
                 $items[] = $item;
             }
         }
